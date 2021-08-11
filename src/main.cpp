@@ -1,6 +1,5 @@
 #include "../lib/lib.h"
 #include "../lib/npp.h"
-#include "../lib/qap.h"
 #include "../lib/tsp.h"
 
 using namespace std;
@@ -25,7 +24,6 @@ Use solve() to compute a QUBO problem
     VectorXf containing the solution
 
 NPP class contains number partitioning problem generator and solution mapper
-QAP class contains quadratic assignment problem generator and solution 
 
 NPP::number_partitioning_problem will generate a NPP problem
 - Input:
@@ -41,26 +39,12 @@ NPP::diff
     c
 - Output:
     Difference btw the two most similar subsets
-
-QAP::quadratic_assignment_problem will generate a QAP problem
-- Input:
-    Empty MatrixXf Q
-    int max coefficient -> will store the max coefficient, not necessary used for statistics
-    float lambda factor -> used to compute penalty
-    string containing input file ("../test/qapk.txt")
-- Output:
-    float penalty
-QAP::y
-- Input:
-    Q
-    Solution vector
-    penalty
 */
 
-#define IT 15  // Algorithm iteration
-#define K 5    // Number of measurements per problem
-#define N 16
-#define RANGE 10
+#define IT 10     // Algorithm iteration
+#define K 5       // Number of measurements per problem
+#define N 9      // Problem's dimension
+#define RANGE 10  // Problem's range
 
 int main() {
     string filename = to_string(time(0));

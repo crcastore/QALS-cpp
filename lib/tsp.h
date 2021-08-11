@@ -15,7 +15,9 @@ class TSP {
     // Some changes occurred
    public:
     static MatrixXd build_tsp(vector<Point> &points);
+    // Input: Empty matrix Q, Distance Matrix D, n number of points
     static void travelling_salesman_problem(MatrixXd &Q, const MatrixXd &D, int n);
+    // Input: Solution vector x, True if solution refinement must be applied
     static vector<ll> decode_solution(const VectorXd &x, bool validate);
     static double cost_route(const MatrixXd &D, const vector<ll> &solution);
     static vector<ll> tsp_brute(const MatrixXd &D, int s = 0);

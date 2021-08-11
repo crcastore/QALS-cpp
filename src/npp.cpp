@@ -5,6 +5,10 @@ ll NPP::number_partitioning_problem(MatrixXd &Q, vector<ll> &nums, int range) {
         cout << "Range must be >= 1" << endl;
         exit(1);
     }
+    if (nums.size() < 2) {
+        cout << "Number of partitions must be >= 2" << endl;
+        exit(1);
+    }
 
     int n = nums.size();
     mt19937_64 e_uniform;

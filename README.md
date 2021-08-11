@@ -1,5 +1,5 @@
 # QALS C++
-C++ implementation of Quantum Annealing Learning Search Algorithm (Pastorello, Davide, and Enrico Blanzieri. "*Quantum annealing learning search for solving QUBO problems.*" *Quantum Information Processing* 18.10 (2019): 1-17.) \
+C++ implementation of Quantum Annealing Learning Search Algorithm (Pastorello, Davide, and Enrico Blanzieri. "*Quantum annealing learning search for solving QUBO problems.*" *Quantum Information Processing* 18.10 (2019): 1-17.)
 
 # Introduction
 This repo refers to "*Quantum Annealing Learning Search Implementations*"
@@ -26,3 +26,32 @@ sudo chmod +x simulate.sh
 sudo chmod +x deploy.sh
 ./deploy.sh
 ```
+
+# Problem submission
+In ```src/main.cpp``` we provide an example on how a number partitioning problem can be solved by QALS.
+
+## Number Partitioning Problem header
+```C++
+#include "lib/npp.h"
+```
+Function ```number_partitioning_problem``` generates a QUBO problem within a given range \
+Function ```diff``` performs difference between the two sets of generated numbers \
+Function ```to_file``` is a simple log file generator 
+
+## Travel Salesman Problem header
+```C++
+#include "lib/qap.h"
+```
+Function ```build_tsp``` generates Distance Matrix given a vector of Point \
+Function ```travelling_salesman_problem``` generates a QUBO embedding of the Distance Matrix \
+Function ```decode solution``` decode a given QUBO solution into a TSP one
+
+# Logs
+```solve``` function provides logs features in order to keep track of solutions computed in case the computation stops for some reasons. In the example provided both the log on console and log on file are enabled:
+```C++
+VectorXd x = solve(Q, IT, K, filename, LOG_CONSOLE | LOG_FILE)
+```
+```filename``` is the actual file where logs are written.
+
+# Contacts
+In case of some errors or bugs, please contact me at thomas.demin@studenti.unitn.it

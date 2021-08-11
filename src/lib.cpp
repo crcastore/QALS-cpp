@@ -15,17 +15,15 @@ VectorXd solve(MatrixXd Q, int imax, int k, string filename, short logs) {
     int n = Q.outerSize();  // Get number of vaiables
 
 #ifdef SIMULATION
-    if (n > 64) {
+    if (n > 24) {
         cout << "[Warning] problem's dimensions are too big for a classical computation" << endl;
         exit(1);
     }
 #endif
 
     //logs
-    bool log_console;
-    bool log_file;
-    logs &LOG_CONSOLE ? log_console = true : log_console = false;
-    logs &LOG_FILE ? log_file = true : log_file = false;
+    bool log_console = logs & LOG_CONSOLE;
+    bool log_file = logs & LOG_FILE;
 
     /*---------------------------
         fd[READ] child read
@@ -105,6 +103,10 @@ VectorXd solve(MatrixXd Q, int imax, int k, string filename, short logs) {
     if (log_file) {
         // With large n could take some time (approx from 30s to 1 min)
         out_file.open(problem);
+        if (!out_file.is_open()) {
+            cout << "ERROR Could not open file " << problem << endl;
+            exit(1);
+        }
         out_file << Q;
         out_file.close();
     }
@@ -331,6 +333,10 @@ void init_seeds(string filename, bool log) {
     if (log) {
         ofstream of;
         of.open("../out/seed-" + filename + ".txt");
+        if (!of.is_open()) {
+            cout << "Error opening seed file" << endl;
+            exit(1);
+        }
         of << "g=";
         seed_g.param(ostream_iterator<int>(of, " "));
         of << endl
@@ -455,10 +461,10 @@ SparseMatrix<double> g_strong(const MatrixXd &Q, const unordered_map<int, int> &
 }
 
 void shuffle_map(map<int, int> &m) {
-    vector<int> keys;  //Vector containing keys of m
-    map<int, int> tmp; //Map containing the non permuted indexes
+    vector<int> keys;   //Vector containing keys of m
+    map<int, int> tmp;  //Map containing the non permuted indexes
 
-    for(auto i : m) {
+    for (auto i : m) {
         tmp[i.first] = i.second;
     }
 
@@ -717,6 +723,10 @@ void log(const MatrixXd &Q, const VectorXd &z_star, double f_star, double min, d
         ss << Q;
         out += "\n" + ss.str();
         out_file.open(tmp_file);
+        if (!out_file.is_open()) {
+            cerr << "Error: cannot open file " << tmp_file << endl;
+            exit(1);
+        }
         out_file << out;
         out_file.close();
 
@@ -753,6 +763,10 @@ void log(const VectorXd &z_star, double f_star, double f_gold, double lambda, do
         ss << z_star.transpose();
         out += "\n" + ss.str();
         out_file.open(tmp_file);
+        if (!out_file.is_open()) {
+            cerr << "Error: cannot open file " << tmp_file << endl;
+            exit(1);
+        }
         out_file << out;
         out_file.close();
 
@@ -760,6 +774,10 @@ void log(const VectorXd &z_star, double f_star, double f_gold, double lambda, do
         if (par == 0) par = 1;
         if (i % par == 0) {
             out_file.open(file_log, ios_base::app);
+            if (!out_file.is_open()) {
+                cerr << "Error: cannot open file " << file_log << endl;
+                exit(1);
+            }
             out_file << out + "\n";
             out_file.close();
         }
