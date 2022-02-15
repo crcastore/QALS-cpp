@@ -2,7 +2,7 @@
 C++ implementation of Quantum Annealing Learning Search Algorithm (Pastorello, Davide, and Enrico Blanzieri. "*Quantum annealing learning search for solving QUBO problems.*" *Quantum Information Processing* 18.10 (2019): 1-17.)
 
 # Introduction
-This repo refers to "*Quantum Annealing Learning Search Implementations*"
+This repo refers to ["*Quantum Annealing Learning Search Implementations*"](https://www.rintonpress.com/journals/doi/QIC22.3-4-1.html), Rinton Press, Quantum Information and Computation (Vol.22 No.3&4 pp0181-0208)
 
 # Requirements
 Since the C++ implementation requires a Python script in order to interface with the Quantum Annealer, some **python packages** must be installed.
@@ -40,7 +40,7 @@ Function ```to_file``` is a simple log file generator
 
 ## Travel Salesman Problem header
 ```C++
-#include "lib/qap.h"
+#include "lib/tsp.h"
 ```
 Function ```build_tsp``` generates Distance Matrix given a vector of Point \
 Function ```travelling_salesman_problem``` generates a QUBO embedding of the Distance Matrix \
